@@ -11,13 +11,27 @@
 # The full name property should return first name and last name separated by a space. It's value cannot be set.
 
 class Student:
-    def __init__(self):
-        self.first_name = ""
-        self.last_name = ""
-        self.age = 0
-        self.cohort_number = 0
-        self. full_name = ""
-        
     
+     # def first_name is a function that can be accessed as a property because of the @decorater
+
     @property
-        def full_name
+    def first_name(self):
+        try:
+            return self.__first_name
+        # .__first_name is private: it's only available for changing inside this class
+        except AttributeError:
+            return ""
+
+    @first_name.setter
+    def first_name(self, first_name):
+        if type(first_name) is str:
+            self.__first_name = first_name
+        else:
+            raise TypeError('Please provide first name as a string. NO NUMBERS ALLOWED I HATE MATH')
+
+      
+    @property
+    def full_name(self):
+        return f'{self.__first_name} {self.last_name}' 
+
+    
